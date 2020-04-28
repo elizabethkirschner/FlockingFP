@@ -17,7 +17,7 @@ AFlockingFPGameModeBase::AFlockingFPGameModeBase() {
 	// use our custom HUD class
 	HUDClass = AFlockingFPHUD::StaticClass();
 
-  PointsToWin = 10;
+  PointsToWin = 13;
 }  
 
 void AFlockingFPGameModeBase::BeginPlay() {
@@ -34,13 +34,15 @@ void AFlockingFPGameModeBase::Tick( float DeltaTime ) {
 
 void AFlockingFPGameModeBase::OnAgentHit() {
   if (AFlockingGameState* GS = Cast<AFlockingGameState>(GameState)) {
-    GS->Points++;
+    GS->Points++; 
 
     if (GS->Points >= PointsToWin) {
-      UE_LOG(LogTemp,Warning,TEXT("YOU WON THE GAME"));
+
     }
     else {
-      UE_LOG(LogTemp,Warning,TEXT("YOU SCORED"));      
+	    if(GEngine) {
+	    	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("YOU SCORED")));
+	    } 
     }
   }
 }

@@ -39,6 +39,7 @@ void AFlockingFPProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherAct
     if (AAgent * Agent = Cast<AAgent>(OtherActor)) {
       if (AFlockingFPGameModeBase* GM = Cast<AFlockingFPGameModeBase>(GetWorld()->GetAuthGameMode())) {
         GM->OnAgentHit();
+        OtherActor->SetActorHiddenInGame( true );
  
         UE_LOG(LogTemp,Warning,TEXT("WE HIT THEM BOOOOOISSSS"));
       }
